@@ -91,7 +91,7 @@ jQuery(document).ready(function($) {
     if (ferror) return false;
     else var str = $(this).serialize();
     var action = $(this).attr('action');
-    if( ! action ) {
+    /*if( ! action ) {
       action = 'contactform/contactform.php';
     }
     $.ajax({
@@ -111,7 +111,17 @@ jQuery(document).ready(function($) {
         }
 
       }
-    });
+    });*/
+    Email.send({
+        Host : "smtp25.elasticemail.com",
+        SecureToken : "tutoken",
+        To : "tucorreo",
+        From : "formulario@gmail.com",
+        Subject : $('#subject').val(),
+        Body : `${$('#subject').val() - $('#name').val() - $('#email').val() - $('#message').val() }`
+    }).then(
+      message => alert($('#message').val())
+    );
     return false;
   });
 
